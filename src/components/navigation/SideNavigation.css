@@ -1,0 +1,12 @@
+@tailwind components;
+
+@layer components {
+  .navigation-panel {
+    @apply border-r p-5 w-64 h-screen absolute top-0 -left-64 bg-coffee-brown;
+    transition: all 0.2s;
+  }
+
+  .navigation-panel.open {
+    @apply left-0;
+  }
+}
