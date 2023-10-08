@@ -12,7 +12,7 @@ const MenuIcon: React.FC<IconProps> = ({
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
-      className={`${className} fill-inherit`}
+      className={`${className} fill-current`}
       onClick={(e) => onClick(e)}
       viewBox="0 0 24 24"
     >

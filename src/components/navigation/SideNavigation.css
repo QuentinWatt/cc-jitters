@@ -2,11 +2,20 @@
 
 @layer components {
   .navigation-panel {
-    @apply border-r p-5 w-64 h-screen absolute top-0 -left-64 bg-coffee-brown;
+    @apply border-r border-coffee-brown-600 w-64 h-screen absolute top-0 -left-64 bg-coffee-brown-500 shadow-md;
     transition: all 0.2s;
   }
 
   .navigation-panel.open {
     @apply left-0;
+  }
+
+  .navigation-link {
+    @apply block px-5 py-2 text-white;
+    transition: all 0.5s;
+  }
+
+  .navigation-link:hover {
+    @apply bg-coffee-brown-600;
   }
 }

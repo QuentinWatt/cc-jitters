@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .button {
+    @apply bg-dark-brown-500 hover:bg-dark-brown-600 px-3 py-3 rounded text-white font-bold;
+  }
+}

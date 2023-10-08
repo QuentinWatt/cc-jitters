@@ -22,12 +22,24 @@ const SideNavigation: React.FC = () => {
   return (
     <ClickOutside onClickOutside={() => dispatch(closeMenu())}>
       <nav className={`navigation-panel ${isOpen ? "open" : null}`}>
+        <div className="py-2 border-b border-b-coffee-brown-600 text-center">
+          <span className="font-bold text-2xl text-white">CC Jitters</span>
+        </div>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" className="navigation-link">
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/orders">Orders</Link>
+            <Link to="/menu" className="navigation-link">
+              Menu
+            </Link>
+          </li>
+          <li>
+            <Link to="/orders" className="navigation-link">
+              Orders
+            </Link>
           </li>
         </ul>
       </nav>
