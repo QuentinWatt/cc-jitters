@@ -8,7 +8,7 @@ const App: React.FC = () => {
     <>
       <Header />
       <SideNavigation />
-      <div className="w-full flex justify-center">
+      <div className="w-full px-3 bg-sand-500 min-h-[calc(100vh-4rem)]">
         <Outlet />
       </div>
     </>

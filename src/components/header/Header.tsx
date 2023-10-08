@@ -9,7 +9,7 @@ const Header: React.FC = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <header className="flex justify-between items-center px-5 py-3 border-b">
+    <header className="flex justify-between items-center px-5 py-3 h-16 border-b bg-dark-brown-500 text-white">
       <MenuIcon onClick={() => dispatch(openMenu())} />
       <Link to="/" className="font-bold text-2xl">
         CC Jitters
