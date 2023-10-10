@@ -16,8 +16,12 @@ export const cart = createSlice({
     addToCart: (state, { payload }: { payload: Product }) => {
       state.products.push(payload);
     },
+    removeFromCart: (state, { payload }: { payload: Product }) => {
+      const index = state.products.indexOf(payload);
+      state.products.splice(index, 1);
+    },
   },
 });
 
-export const { addToCart } = cart.actions;
+export const { addToCart, removeFromCart } = cart.actions;
 export default cart.reducer;
