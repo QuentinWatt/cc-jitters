@@ -6,4 +6,8 @@
   .button {
     @apply bg-dark-brown-500 hover:bg-dark-brown-600 px-3 py-3 rounded text-white font-bold;
   }
+
+  .card {
+    @apply bg-coffee-brown-500 border border-coffee-brown-600 p-3 rounded;
+  }
 }
