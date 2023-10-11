@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProductCard from "../components/products/ProductCard";
-
-const products = [
-  {
-    title: "Long Black",
-    price: "30",
-    image_url: "https://source.unsplash.com/Zgq3cqztoLI/100x100",
-  },
-  {
-    title: "Cappuccino",
-    price: "35",
-    image_url: "https://source.unsplash.com/HnGNMt8sjnU/100x100",
-  },
-];
+import { firebase } from "../firebase";
+import { getDatabase, ref, onValue } from "firebase/database";
 
 const Products: React.FC = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const database = getDatabase(firebase);
+    const productsRef = ref(database, "products");
+
+    onValue(productsRef, (snapshot) => {
+      console.log(snapshot.val());
+      const products = snapshot.val();
+      setProducts(products);
+    });
+  }, []);
+
   return (
     <div className="py-5">
       {products.map((product) => (
