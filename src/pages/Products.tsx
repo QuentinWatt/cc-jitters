@@ -2,28 +2,30 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../components/products/ProductCard";
 import { firebase } from "../firebase";
 import { getDatabase, ref, onValue } from "firebase/database";
+import Product from "../models/Product";
 
 const Products: React.FC = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     const database = getDatabase(firebase);
     const productsRef = ref(database, "products");
 
     onValue(productsRef, (snapshot) => {
-      console.log(snapshot.val());
       const products = snapshot.val();
       setProducts(products);
+      console.log(products);
     });
   }, []);
 
   return (
     <div className="py-5">
-      {products.map((product) => (
-        <div className="mb-5">
-          <ProductCard product={product} />
-        </div>
-      ))}
+      {products &&
+        products.map((product, key) => (
+          <div key={key} className="mb-5">
+            <ProductCard product={product} />
+          </div>
+        ))}
     </div>
   );
 };
