@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Product from "../../models/Product";
+import CartItem from "../../models/CartItem";
 
 export interface CartState {
-  products: Product[];
+  items: CartItem[];
 }
 
 const initialState: CartState = {
-  products: [],
+  items: [],
 };
 
 export const cart = createSlice({
@@ -14,14 +15,20 @@ export const cart = createSlice({
   initialState,
   reducers: {
     addToCart: (state, { payload }: { payload: Product }) => {
-      state.products.push(payload);
-    },
-    removeFromCart: (state, { payload }: { payload: Product }) => {
-      const index = state.products.indexOf(payload);
-      state.products.splice(index, 1);
+      const itemInCart = state.items.find(
+        (item) => item.product.title === payload.title
+      );
+      if (!itemInCart) {
+        state.items.push({
+          product: payload,
+          quantity: 1,
+        });
+      } else {
+        itemInCart.quantity++;
+      }
     },
   },
 });
 
-export const { addToCart, removeFromCart } = cart.actions;
+export const { addToCart } = cart.actions;
 export default cart.reducer;
