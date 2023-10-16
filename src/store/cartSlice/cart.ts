@@ -27,8 +27,20 @@ export const cart = createSlice({
         itemInCart.quantity++;
       }
     },
+    increaseQuantity: (state, { payload }: { payload: Product }) => {
+      const itemInCart = state.items.find(
+        (item) => item.product.title === payload.title
+      );
+      itemInCart && itemInCart.quantity++;
+    },
+    decreaseQuantity: (state, { payload }: { payload: Product }) => {
+      const itemInCart = state.items.find(
+        (item) => item.product.title === payload.title
+      );
+      itemInCart && itemInCart.quantity--;
+    },
   },
 });
 
-export const { addToCart } = cart.actions;
+export const { addToCart, increaseQuantity, decreaseQuantity } = cart.actions;
 export default cart.reducer;

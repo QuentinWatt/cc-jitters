@@ -17,7 +17,7 @@ export const cartTotal = createSelector(
   (items) => {
     let total: number = 0;
     items.forEach((item) => {
-      total = Number(total) + Number(item.product.price);
+      total = Number(total) + Number(item.product.price) * item.quantity;
     });
     return total;
   }

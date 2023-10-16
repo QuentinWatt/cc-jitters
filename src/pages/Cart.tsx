@@ -16,9 +16,13 @@ const Cart: React.FC = () => {
         <CartItemCard key={key} item={item} className="mb-3" />
       ))}
 
-      <div className="font-bold text-xl">Total: R{orderTotal}</div>
+      <div className="font-bold text-3xl text-right mb-3">
+        Total: R{orderTotal}
+      </div>
 
-      <Button>Proceed with order</Button>
+      <div className="flex justify-end">
+        <Button>Proceed with order</Button>
+      </div>
     </div>
   );
 };
