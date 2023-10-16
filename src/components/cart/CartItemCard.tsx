@@ -1,23 +1,64 @@
 import React from "react";
-import Product from "../../models/Product";
+import CartItem from "../../models/CartItem";
 import Button from "../shared/Button";
 import { useAppDispatch } from "../../store/hooks";
-import { removeFromCart } from "../../store/cartSlice/cart";
+import {
+  decreaseQuantity,
+  increaseQuantity,
+  removeFromCart,
+} from "../../store/cartSlice/cart";
 
 interface Props {
-  item: Product;
+  item: CartItem;
   className?: string;
 }
 
-const CartItemCard: React.FC<Props> = ({ item, className }) => {
+const CartItemCard: React.FC<Props> = ({
+  item,
+  className,
+}) => {
   const dispatch = useAppDispatch();
-
   return (
-    <div className={`card ${className}`}>
-      <h3>{item.title}</h3>
-      <div>R{item.price}</div>
-
-      <Button onClick={() => dispatch(removeFromCart(item))}>Remove</Button>
+    <div
+      className={`card flex justify-between ${className}`}
+    >
+      <div>
+        <h3 className="font-bold text-2xl">
+          {item.product.title}
+        </h3>
+        <div className="font-bold text-xl mb-3">
+          R{item.product.price}{" "}
+          <span className="font-normal">(each)</span>
+        </div>
+        <Button
+          onClick={() =>
+            dispatch(removeFromCart(item.product))
+          }
+        >
+          Remove
+        </Button>
+      </div>
+      <div className="text-right">
+        <div className="font-bold text-xl mb-3">
+          <div>Quantity:</div>
+          {item.quantity}
+        </div>
+        <Button
+          className="mr-2"
+          onClick={() =>
+            dispatch(decreaseQuantity(item.product))
+          }
+        >
+          -
+        </Button>
+        <Button
+          onClick={() =>
+            dispatch(increaseQuantity(item.product))
+          }
+        >
+          +
+        </Button>
+      </div>
     </div>
   );
 };

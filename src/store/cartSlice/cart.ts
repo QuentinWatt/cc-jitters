@@ -1,27 +1,71 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Product from "../../models/Product";
+import CartItem from "../../models/CartItem";
 
 export interface CartState {
-  products: Product[];
+  items: CartItem[];
 }
 
 const initialState: CartState = {
-  products: [],
+  items: [],
 };
 
 export const cart = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state, { payload }: { payload: Product }) => {
-      state.products.push(payload);
+    addToCart: (
+      state,
+      { payload }: { payload: Product }
+    ) => {
+      const itemInCart = state.items.find(
+        (item) => item.product.title === payload.title
+      );
+      if (!itemInCart) {
+        state.items.push({
+          product: payload,
+          quantity: 1,
+        });
+      } else {
+        itemInCart.quantity++;
+      }
     },
-    removeFromCart: (state, { payload }: { payload: Product }) => {
-      const index = state.products.indexOf(payload);
-      state.products.splice(index, 1);
+    removeFromCart: (
+      state,
+      { payload }: { payload: Product }
+    ) => {
+      const itemIndex = state.items.findIndex(
+        (item) => item.product.title == payload.title
+      );
+      if (itemIndex !== undefined) {
+        state.items.splice(itemIndex, 1);
+      }
+    },
+    increaseQuantity: (
+      state,
+      { payload }: { payload: Product }
+    ) => {
+      const itemInCart = state.items.find(
+        (item) => item.product.title === payload.title
+      );
+      itemInCart && itemInCart.quantity++;
+    },
+    decreaseQuantity: (
+      state,
+      { payload }: { payload: Product }
+    ) => {
+      const itemInCart = state.items.find(
+        (item) => item.product.title === payload.title
+      );
+      itemInCart && itemInCart.quantity--;
     },
   },
 });
 
-export const { addToCart, removeFromCart } = cart.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  increaseQuantity,
+  decreaseQuantity,
+} = cart.actions;
 export default cart.reducer;

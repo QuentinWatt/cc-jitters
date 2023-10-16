@@ -5,20 +5,24 @@ import Button from "../components/shared/Button";
 import { cartTotal } from "../store/cartSlice/selectors";
 
 const Cart: React.FC = () => {
-  const cartItems = useAppSelector((state) => state.cart.products);
+  const cartItems = useAppSelector((state) => state.cart.items);
   const orderTotal = useAppSelector(cartTotal);
 
   return (
     <div className="py-5">
       <h1 className="mb-3 font-bold text-3xl">Your cart</h1>
 
-      {cartItems.map((item) => (
-        <CartItemCard item={item} className="mb-3" />
+      {cartItems.map((item, key) => (
+        <CartItemCard key={key} item={item} className="mb-3" />
       ))}
 
-      <div className="font-bold text-xl">Total: R{orderTotal}</div>
+      <div className="font-bold text-3xl text-right mb-3">
+        Total: R{orderTotal}
+      </div>
 
-      <Button>Proceed with order</Button>
+      <div className="flex justify-end">
+        <Button>Proceed with order</Button>
+      </div>
     </div>
   );
 };

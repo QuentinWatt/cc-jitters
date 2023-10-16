@@ -14,7 +14,6 @@ const Products: React.FC = () => {
     onValue(productsRef, (snapshot) => {
       const products = snapshot.val();
       setProducts(products);
-      console.log(products);
     });
   }, []);
 
