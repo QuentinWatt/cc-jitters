@@ -18,12 +18,16 @@ export const cart = createSlice({
       state,
       { payload }: { payload: Product }
     ) => {
+      const { title, price } = payload;
       const itemInCart = state.items.find(
         (item) => item.product.title === payload.title
       );
       if (!itemInCart) {
         state.items.push({
-          product: payload,
+          product: {
+            title,
+            price,
+          },
           quantity: 1,
         });
       } else {
@@ -68,4 +72,5 @@ export const {
   increaseQuantity,
   decreaseQuantity,
 } = cart.actions;
+
 export default cart.reducer;

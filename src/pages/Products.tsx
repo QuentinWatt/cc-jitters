@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "../components/products/ProductCard";
 import { firebase } from "../firebase";
-import { getDatabase, ref, onValue } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  onValue,
+} from "firebase/database";
 import Product from "../models/Product";
 
 const Products: React.FC = () => {
@@ -12,8 +16,7 @@ const Products: React.FC = () => {
     const productsRef = ref(database, "products");
 
     onValue(productsRef, (snapshot) => {
-      const products = snapshot.val();
-      setProducts(products);
+      setProducts(snapshot.val());
     });
   }, []);
 
