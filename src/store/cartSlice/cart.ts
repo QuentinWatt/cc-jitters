@@ -14,6 +14,9 @@ export const cart = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    emptyCart: (state) => {
+      state.items = [];
+    },
     addToCart: (
       state,
       { payload }: { payload: Product }
@@ -67,6 +70,7 @@ export const cart = createSlice({
 });
 
 export const {
+  emptyCart,
   addToCart,
   removeFromCart,
   increaseQuantity,

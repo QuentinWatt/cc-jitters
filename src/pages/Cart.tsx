@@ -1,13 +1,18 @@
 import React from "react";
-import { useAppSelector } from "../store/hooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../store/hooks";
 import CartItemCard from "../components/cart/CartItemCard";
 import Button from "../components/shared/Button";
 import { cartTotal } from "../store/cartSlice/selectors";
 import { firebase } from "../firebase";
 import { getDatabase, ref, push } from "firebase/database";
 import { useNavigate } from "react-router-dom";
+import { emptyCart } from "../store/cartSlice/cart";
 
 const Cart: React.FC = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const cartItems = useAppSelector(
     (state) => state.cart.items
@@ -21,6 +26,7 @@ const Cart: React.FC = () => {
       items: cartItems,
       total: orderTotal,
     });
+    dispatch(emptyCart());
     navigate("/orders");
   };
 
